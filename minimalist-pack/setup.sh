@@ -77,17 +77,17 @@ if [[ "$OS" == "Linux" && "$ARCH" == "x86_64" ]]; then
           # Kiểm tra xem đã config chưa để tránh trùng lặp
           if ! grep -q "FZF_DEFAULT_COMMAND" "$rc_file"; then
               echo "    -> Thêm cấu hình vào $rc_file"
-              cat <<EOT >> "$rc_file"
+cat <<EOT >> "$rc_file"
 
-            # --- FZF & RIPGREP CONFIG ---
-            # Sử dụng Ripgrep làm engine tìm kiếm cho FZF (nhanh, bỏ qua .git)
-            export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-            export FZF_CTRL_T_COMMAND="\$FZF_DEFAULT_COMMAND"
-            
-            # Load Key Bindings (Ctrl+T, Alt+C)
-            [ -f ~/$binding_file ] && source ~/$binding_file
-            # ----------------------------
-            EOT
+# --- FZF & RIPGREP CONFIG ---
+# Sử dụng Ripgrep làm engine tìm kiếm cho FZF (nhanh, bỏ qua .git)
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="\$FZF_DEFAULT_COMMAND"
+
+# Load Key Bindings (Ctrl+T, Alt+C)
+[ -f ~/$binding_file ] && source ~/$binding_file
+# ----------------------------
+EOT
           else
               echo "    -> $rc_file đã có cấu hình FZF. Bỏ qua."
           fi
