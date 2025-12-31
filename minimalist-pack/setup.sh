@@ -2,6 +2,7 @@
 
 # Version
 RP_VERSION='15.1.0'
+ATUIN_VERSION='18.10.0'
 FZF_VERSION='0.67.0'
 
 # Màu mè tí cho chuyên nghiệp
@@ -47,6 +48,31 @@ if [[ "$OS" == "Linux" && "$ARCH" == "x86_64" ]]; then
     rm -rf ripgrep-${RP_VERSION}*
   else
     echo "    -> Ripgrep đã cài đặt."
+  fi
+
+  # --- Atuin (Terminal History) ---
+  # https://github.com/atuinsh/atuin/releases/tag/v18.10.0
+  if ! command -v atuin &>/dev/null; then
+    echo "    -> Installing Atuin..."
+    curl -LO https://github.com/atuinsh/atuin/releases/download/v${ATUIN_VERSION}/atuin-x86_64-unknown-linux-gnu.tar.gz
+    tar -xzf atuin-x86_64-unknown-linux-gnu.tar.gz
+    sudo mv atuin /usr/local/bin/
+    rm -f atuin-x86_64-unknown-linux-gnu.tar.gz
+    # Cấu hình Atuin cho Zsh
+    if [ -f "$HOME/.zshrc" ]; then
+        if ! grep -q "atuin init zsh" "$HOME/.zshrc"; then
+            echo "    -> Cấu hình Atuin cho Zsh"
+cat <<EOT >> "$HOME/.zshrc"
+# --- Atuin Terminal History ---
+eval "\$(atuin init zsh)"
+# -----------------------------
+EOT
+        else
+            echo "    -> .zshrc đã có cấu hình Atuin. Bỏ qua."
+        fi
+    fi
+  else
+    echo "    -> Atuin đã cài đặt."
   fi
 
   # --- FZF Binary ---
