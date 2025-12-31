@@ -55,9 +55,9 @@ if [[ "$OS" == "Linux" && "$ARCH" == "x86_64" ]]; then
   if ! command -v fzf &>/dev/null; then
     echo "    -> Installing FZF..."
     curl -LO https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz
-    tar -xzf fzf-0.46.1-linux_amd64.tar.gz
+    tar -xzf fzf-0.67.0-linux_amd64.tar.gz
     sudo mv fzf /usr/local/bin/
-    rm -f fzf-0.46.1-linux_amd64.tar.gz
+    rm -f fzf-0.67.0-linux_amd64.tar.gz
   else
     echo "    -> FZF đã cài đặt."
   fi
