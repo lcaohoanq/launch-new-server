@@ -39,20 +39,22 @@ if [[ "$OS" == "Linux" && "$ARCH" == "x86_64" ]]; then
   # Cần sudo để ghi vào /usr/local/bin
 
   # --- Ripgrep ---
+  # https://github.com/BurntSushi/ripgrep/releases/tag/15.1.0
   if ! command -v rg &>/dev/null; then
     echo "    -> Installing Ripgrep..."
-    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/14.1.0/ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz
-    tar -xzf ripgrep-14.1.0-x86_64-unknown-linux-musl.tar.gz
-    sudo mv ripgrep-14.1.0-x86_64-unknown-linux-musl/rg /usr/local/bin/
-    rm -rf ripgrep-14.1.0*
+    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/15.1.0/ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz
+    tar -xzf ripgrep-15.1.0-x86_64-unknown-linux-musl.tar.gz
+    sudo mv ripgrep-15.1.0-x86_64-unknown-linux-musl/rg /usr/local/bin/
+    rm -rf ripgrep-15.1.0*
   else
     echo "    -> Ripgrep đã cài đặt."
   fi
 
   # --- FZF ---
+  # https://github.com/junegunn/fzf/releases/tag/v0.67.0
   if ! command -v fzf &>/dev/null; then
     echo "    -> Installing FZF..."
-    curl -LO https://github.com/junegunn/fzf/releases/download/0.46.1/fzf-0.46.1-linux_amd64.tar.gz
+    curl -LO https://github.com/junegunn/fzf/releases/download/v0.67.0/fzf-0.67.0-linux_amd64.tar.gz
     tar -xzf fzf-0.46.1-linux_amd64.tar.gz
     sudo mv fzf /usr/local/bin/
     rm -f fzf-0.46.1-linux_amd64.tar.gz
