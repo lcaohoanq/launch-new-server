@@ -81,7 +81,7 @@ EOT
     echo "    -> Installing Atuin..."
     curl -LO https://github.com/atuinsh/atuin/releases/download/v${ATUIN_VERSION}/atuin-x86_64-unknown-linux-gnu.tar.gz
     tar -xzf atuin-x86_64-unknown-linux-musl.tar.gz
-    sudo mv atuin-x86_64-unknown-linux-musl.tar.gz/atuin /usr/local/bin/
+    sudo mv atuin-x86_64-unknown-linux-musl/atuin /usr/local/bin/
     rm -f atuin-x86_64-unknown-linux-musl.tar.gz
     # Cấu hình Atuin cho Zsh
     if [ -f "$HOME/.zshrc" ]; then
