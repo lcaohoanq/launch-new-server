@@ -2,12 +2,12 @@
   ansible.builtin.apt:
     name: sudo
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Create bootstrap user with sudo
   ansible.builtin.user:
     name: "{{ bootstrap_user }}"
     groups: sudo
-    append: yes
+    append: true
     shell: /bin/bash
-    create_home: yes
+    create_home: true

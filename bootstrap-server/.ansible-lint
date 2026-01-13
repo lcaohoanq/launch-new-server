@@ -1,0 +1,13 @@
+---
+profile: production  # or 'basic', 'moderate', 'safety', 'shared'
+
+exclude_paths:
+  - .cache/
+  - .github/
+  - venv/
+
+skip_list:
+  - yaml[line-length]  # Example: skip specific rules
+
+warn_list:
+  - experimental

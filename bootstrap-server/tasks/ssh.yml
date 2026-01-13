@@ -1,5 +1,5 @@
 - name: Add SSH public key for bootstrap user
-  ansible.builtin.authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ bootstrap_user }}"
     state: present
     key: "{{ bootstrap_pubkey }}"

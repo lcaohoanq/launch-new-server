@@ -2,16 +2,16 @@
   ansible.builtin.apt:
     name: ufw
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Allow SSH port
-  ansible.builtin.ufw:
+  community.general.ufw:
     rule: allow
     port: "{{ ssh_port }}"
     proto: tcp
 
 - name: Allow other ports
-  ansible.builtin.ufw:
+  community.general.ufw:
     rule: allow
     port: "{{ item }}"
     proto: tcp
@@ -19,15 +19,15 @@
   when: item != ssh_port
 
 - name: Set default incoming policy to deny
-  ansible.builtin.ufw:
+  community.general.ufw:
     direction: incoming
     policy: deny
 
 - name: Set default outgoing policy to allow
-  ansible.builtin.ufw:
+  community.general.ufw:
     direction: outgoing
     policy: allow
 
 - name: Enable UFW
-  ansible.builtin.ufw:
+  community.general.ufw:
     state: enabled

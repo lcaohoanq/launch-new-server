@@ -1,8 +1,19 @@
-- hosts: debian12
+- name: Bootstrap Server
+  hosts: servers
   become: true
+
   tasks:
-    - import_tasks: tasks/users.yml
-    - import_tasks: tasks/ssh.yml
-    - import_tasks: tasks/hardening.yml
-    - import_tasks: tasks/ufw.yml
-    - import_tasks: tasks/fail2ban.yml
+    - name: Configure Users
+      ansible.builtin.import_tasks: tasks/users.yml
+
+    - name: Configure SSH
+      ansible.builtin.import_tasks: tasks/ssh.yml
+
+    - name: Configure UFW
+      ansible.builtin.import_tasks: tasks/ufw.yml
+
+    - name: Configure Hardening
+      ansible.builtin.import_tasks: tasks/hardening.yml
+
+    - name: Configure Fail2Ban
+      ansible.builtin.import_tasks: tasks/fail2ban.yml

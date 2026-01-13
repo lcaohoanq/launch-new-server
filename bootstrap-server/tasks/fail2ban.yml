@@ -2,7 +2,7 @@
   ansible.builtin.apt:
     name: fail2ban
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: Create jail.local
   ansible.builtin.copy:
@@ -24,4 +24,4 @@
   ansible.builtin.service:
     name: fail2ban
     state: restarted
-    enabled: yes
+    enabled: true

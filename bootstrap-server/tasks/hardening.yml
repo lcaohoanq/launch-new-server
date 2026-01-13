@@ -2,7 +2,7 @@
   ansible.builtin.copy:
     src: /etc/ssh/sshd_config
     dest: /etc/ssh/sshd_config.bak
-    remote_src: yes
+    remote_src: true
     mode: "0644"
 
 - name: Disable root login
@@ -23,7 +23,20 @@
     regexp: "^#?Port"
     line: "Port {{ ssh_port }}"
 
+- name: Validate SSH configuration
+  ansible.builtin.command: sshd -t
+  changed_when: false
+
 - name: Restart SSH
   ansible.builtin.service:
     name: ssh
     state: restarted
+  register: ssh_restart
+
+- name: Wait for SSH to be available
+  ansible.builtin.wait_for:
+    port: "{{ ssh_port }}"
+    host: "{{ ansible_host }}"
+    delay: 2
+    timeout: 30
+  delegate_to: localhost
