@@ -1,1 +1,1 @@
-# Server Dotfiles
+# Hand-on with server

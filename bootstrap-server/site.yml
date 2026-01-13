@@ -1,0 +1,8 @@
+- hosts: debian12
+  become: true
+  tasks:
+    - import_tasks: tasks/users.yml
+    - import_tasks: tasks/ssh.yml
+    - import_tasks: tasks/hardening.yml
+    - import_tasks: tasks/ufw.yml
+    - import_tasks: tasks/fail2ban.yml
