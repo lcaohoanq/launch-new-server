@@ -1,10 +1,12 @@
 all:
-  hosts:
-    debian12:
-      ansible_host: 192.168.88.108
-      ansible_user: root
-      ansible_python_interpreter: /usr/bin/python3.11
-
-servers:
-  hosts:
-    debian12:
+  children:
+    servers:
+      hosts:
+        debian12:
+          ansible_host: 192.168.88.107
+          ansible_user: hoang
+          ansible_python_interpreter: auto_silent
+        centos9:
+          ansible_host: 192.168.88.177
+          ansible_user: hoang
+          ansible_python_interpreter: auto_silent

@@ -1,0 +1,36 @@
+---
+# Role metadata for ssh_hardening
+
+galaxy_info:
+  role_name: ssh_hardening
+  author: lcaohoanq
+  description: Phase 2 - SSH hardening and security configuration
+  license: MIT
+  min_ansible_version: "2.9"
+  
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+
+  galaxy_tags:
+    - security
+    - ssh
+    - hardening
+
+dependencies: []

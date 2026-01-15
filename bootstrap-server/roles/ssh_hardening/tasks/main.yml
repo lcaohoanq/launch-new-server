@@ -1,0 +1,43 @@
+---
+# Phase 2: SSH Hardening (runs as bootstrap user)
+# This role hardens SSH configuration
+
+- name: Disable password authentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PasswordAuthentication"
+    line: "PasswordAuthentication no"
+  become: true
+  notify: restart sshd
+
+- name: Ensure SSH port is configured
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?Port"
+    line: "Port {{ ssh_port }}"
+  become: true
+  notify: restart sshd
+
+- name: Disable empty passwords
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PermitEmptyPasswords"
+    line: "PermitEmptyPasswords no"
+  become: true
+  notify: restart sshd
+
+- name: Set MaxAuthTries
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?MaxAuthTries"
+    line: "MaxAuthTries {{ ssh_max_auth_tries }}"
+  become: true
+  notify: restart sshd
+
+- name: Disable X11 forwarding
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?X11Forwarding"
+    line: "X11Forwarding {{ 'yes' if ssh_x11_forwarding else 'no' }}"
+  become: true
+  notify: restart sshd

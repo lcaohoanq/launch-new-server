@@ -1,0 +1,46 @@
+---
+# Phase 1: Bootstrap User Setup (runs as root)
+# This role creates the bootstrap user with sudo privileges
+# and sets up SSH key authentication
+
+- name: Ensure sudo is installed
+  ansible.builtin.package:
+    name: sudo
+    state: present
+    update_cache: true
+
+- name: Create bootstrap user with sudo
+  ansible.builtin.user:
+    name: "{{ bootstrap_user }}"
+    groups: "{{ 'sudo' if ansible_facts.os_family == 'Debian' else 'wheel' }}"
+    append: true
+    shell: /bin/bash
+    create_home: true
+
+- name: Add SSH public key for bootstrap user
+  ansible.posix.authorized_key:
+    user: "{{ bootstrap_user }}"
+    state: present
+    key: "{{ bootstrap_pubkey }}"
+
+- name: Allow passwordless sudo for bootstrap user
+  ansible.builtin.copy:
+    dest: "/etc/sudoers.d/{{ bootstrap_user }}"
+    content: "{{ bootstrap_user }} ALL=(ALL) NOPASSWD:ALL\n"
+    owner: root
+    group: root
+    mode: "0440"
+
+- name: Backup sshd_config
+  ansible.builtin.copy:
+    src: /etc/ssh/sshd_config
+    dest: "/etc/ssh/sshd_config.bak.{{ ansible_date_time.iso8601 }}"
+    remote_src: true
+    mode: "0644"
+
+- name: Disable root login via SSH
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "^#?PermitRootLogin"
+    line: "PermitRootLogin no"
+  notify: restart sshd

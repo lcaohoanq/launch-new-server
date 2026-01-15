@@ -1,0 +1,9 @@
+---
+# Default variables for firewall role
+# These can be overridden in group_vars or host_vars
+
+ssh_port: 22
+firewall_allowed_ports:
+  - 22  # SSH
+  - 80  # HTTP
+  - 443 # HTTPS

@@ -1,0 +1,7 @@
+---
+# Default variables for ssh_hardening role
+# These can be overridden in group_vars or host_vars
+
+ssh_port: 22
+ssh_max_auth_tries: 3
+ssh_x11_forwarding: false

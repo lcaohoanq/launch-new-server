@@ -1,8 +1,20 @@
-- hosts: debian12
+---
+# Phase 1: Bootstrap - Create user and disable root SSH
+# This phase MUST run as root and is only needed ONCE for initial server setup
+- name: Phase 1 - Bootstrap User Setup
+  hosts: servers
+  remote_user: root
   become: true
-  tasks:
-    - import_tasks: tasks/users.yml
-    - import_tasks: tasks/ssh.yml
-    - import_tasks: tasks/hardening.yml
-    - import_tasks: tasks/ufw.yml
-    - import_tasks: tasks/fail2ban.yml
+  roles:
+    - bootstrap_user
+
+# Phase 2: Security Hardening - SSH and Firewall
+# This phase runs as the bootstrap user (hoang) with sudo
+# From this point forward, NEVER use root again
+- name: Phase 2 - Security Hardening
+  hosts: servers
+  remote_user: hoang
+  become: true
+  roles:
+    - ssh_hardening
+    - firewall

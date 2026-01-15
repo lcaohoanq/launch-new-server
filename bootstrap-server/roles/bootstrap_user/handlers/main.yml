@@ -1,0 +1,7 @@
+---
+# Handlers for bootstrap_user role
+
+- name: restart sshd
+  ansible.builtin.service:
+    name: "{{ 'ssh' if ansible_facts.os_family == 'Debian' else 'sshd' }}"
+    state: restarted

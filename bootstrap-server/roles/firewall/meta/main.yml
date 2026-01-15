@@ -1,0 +1,37 @@
+---
+# Role metadata for firewall
+
+galaxy_info:
+  role_name: firewall
+  author: lcaohoanq
+  description: Phase 2 - Firewall configuration (UFW/firewalld)
+  license: MIT
+  min_ansible_version: "2.9"
+  
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+
+  galaxy_tags:
+    - security
+    - firewall
+    - networking
+    - hardening
+
+dependencies: []

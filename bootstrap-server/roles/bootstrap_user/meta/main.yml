@@ -1,0 +1,37 @@
+---
+# Role metadata for bootstrap_user
+
+galaxy_info:
+  role_name: bootstrap_user
+  author: lcaohoanq
+  description: Phase 1 - Bootstrap user creation with sudo and SSH key setup
+  license: MIT
+  min_ansible_version: "2.9"
+  
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+        - noble
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+        - "40"
+
+  galaxy_tags:
+    - security
+    - system
+    - bootstrap
+    - hardening
+
+dependencies: []

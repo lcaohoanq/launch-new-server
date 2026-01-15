@@ -1,0 +1,11 @@
+---
+# Phase 2: Firewall Configuration (runs as bootstrap user)
+# This role configures the firewall based on the OS family
+
+- name: Configure firewall for Debian-based systems
+  ansible.builtin.import_tasks: ufw.yml
+  when: ansible_facts.os_family == "Debian"
+
+- name: Configure firewall for RedHat-based systems
+  ansible.builtin.import_tasks: firewalld.yml
+  when: ansible_facts.os_family == "RedHat"

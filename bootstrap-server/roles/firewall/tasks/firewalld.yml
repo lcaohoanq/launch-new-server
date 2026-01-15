@@ -1,0 +1,34 @@
+---
+# Firewalld configuration for RedHat-based systems
+
+- name: Install firewalld
+  ansible.builtin.dnf:
+    name: firewalld
+    state: present
+  become: true
+
+- name: Enable and start firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    enabled: true
+    state: started
+  become: true
+
+- name: Allow SSH
+  ansible.posix.firewalld:
+    port: "{{ ssh_port }}/tcp"
+    permanent: true
+    immediate: true
+    state: enabled
+    zone: public
+  become: true
+
+- name: Allow other ports
+  ansible.posix.firewalld:
+    port: "{{ item }}/tcp"
+    permanent: true
+    state: enabled
+    zone: public
+  loop: "{{ firewall_allowed_ports }}"
+  when: item != ssh_port
+  become: true
